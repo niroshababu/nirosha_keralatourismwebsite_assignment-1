@@ -148,14 +148,18 @@ body {
                     </div>
                     <div class="modal-body">
                         <!-- <form action="/examples/actions/confirmation.php" method="post"> -->
-                          <form action="index5.html">
+                          <form action="index5.html"onsubmit="return validate()">
                             <div class="form-group">
-                                <i class="fa fa-user"></i>
-                                <input type="text" class="form-control" placeholder="Email" required="required">
+                                <label> Email:</label>
+                                <input type="text" name="email" class="form-control" placeholder="email" id="email" required="required">
                             </div>
                             <div class="form-group">
-                                <i class="fa fa-lock"></i>
-                                <input type="password" class="form-control" placeholder="Password" required="required">					
+                              <label for="error" id="error"></label>
+                            </div>
+                            <div class="form-group">
+                              <label> Password:</label>
+                              <input type="password" name="psw"  class="form-control" placeholder="password" id="psw" size="15" maxlength="100" onkeyup="return passwordChanged()" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 characters" required>
+                              <span id="strength">Type Password</span>				
                             </div>
                             <div class="form-group bottom-action clearfix">
                                 <label class="form-check-label"><input type="checkbox"> Remember me</label>
@@ -168,9 +172,50 @@ body {
                          
                         </form>
                     </div>
-                    <div class="modal-footer">Don't have an account? <a href="#">Sign up</a></div>
+                    <div class="modal-footer">Don't have an account? <a href="login2.html">Sign up</a></div>
                 </div>
             </div>
         </div>  
+        <script type="text/javascript">
+
+          var email = document.getElementById("email");
+           var error = document.getElementById("error");
+           
+          function validate(){
+              let regexp = /^([A-Za-z0-9\.-]+)@([A-Za-z0-9\-]+).([a-z]{2,3})(.[a-z]{2,3})?$/
+              if(regexp.test(email.value)){
+                  error.innerHTML = "Valid";
+                  error.style.color = "green";
+                  return true;
+              }
+              else{
+                  error.innerHTML = "Invalid";
+                  error.style.color = "red";
+                  return false;
+              }
+          }
+          
+          
+
+          function passwordChanged() {
+        var strength = document.getElementById('strength');
+        var strongRegex = new RegExp("^(?=.{9,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$", "g");
+        var mediumRegex = new RegExp("^(?=.{6,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+        var enoughRegex = new RegExp("(?=.{4,}).*", "g");
+        var pwd = document.getElementById("psw");
+        if (pwd.value.length == 0) {
+            strength.innerHTML = 'Type Password';
+        } else if (false == enoughRegex.test(pwd.value)) {
+            strength.innerHTML = 'More Characters';
+        } else if (strongRegex.test(pwd.value)) {
+            strength.innerHTML = '<span style="color:green">Strong!</span>';
+        } else if (mediumRegex.test(pwd.value)) {
+            strength.innerHTML = '<span style="color:orange">Medium!</span>';
+        } else {
+            strength.innerHTML = '<span style="color:red">Weak!</span>';
+        }
+    }
+
+          </script>
 </body>
 </html>

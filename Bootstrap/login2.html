@@ -204,24 +204,23 @@ h2{
 
 <div class="form-group">
 	<label> Password:</label>
-	<input type="password" name="psw"  class="form-control" placeholder="password" id="psw" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 characters" required>
-	<!-- <span id="password" class="text-danger font-weight-bold"></span> -->
+	<input type="password" name="psw"  class="form-control" placeholder="password" id="psw" size="15" maxlength="100" onkeyup="return passwordChanged()" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 characters" required>
+	<span id="strength">Type Password</span>
 	</div>
 	<br>
 	
 	<div class="form-group">
 		
 		<label> Confirm Password:</label>
-		<input type="password" name="password"  class="form-control" placeholder=" confirm password" id="psw" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password doesn't match" >
+		<input type="password" name="password"  class="form-control" placeholder=" confirm password" id="psw" required="required" title="Password doesn't match" >
 		<!-- <span id="confirmpassword" class="text-danger font-weight-bold"></span> -->
 		</div>
 		<br>
 		<div class="form-group">
-			<label> Mobile Number:</label>
-      <input type="tel" name="number"  class="form-control" placeholder=" mobile number" id="mobilenumber" required="required" pattern="/^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/"required>
-      <!-- <small>Format: XXX-XXX-XXXX, XXX.XXX.XXXX, XXX XXX XXXX</small><br><br> -->
+			<label> Phonenumber:</label>
+      <input type="tel" name="number"  class="form-control" placeholder=" phonenumber" id="phoneno" pattern="\d{3}[-.\s]\d{3}[-.\s]\d{4}?$" required="required">
 			<!-- <span id="mobilenumber" class="text-danger font-weight-bold"></span> -->
-			</div>
+      </div>
 			<br>
 			<div class="form-group">
 				<label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
@@ -230,7 +229,7 @@ h2{
 					<button type="submit" class="btn btn-primary btn-lg">Sign Up</button>	
 				</div>
 </form>
-<div id="message">
+<!-- <div id="message">
 	<h3>Password must contain the following:</h3>
 	<p id="letter" class="invalid">A <b>lowercase</b> letter</p>
 	<p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
@@ -238,7 +237,7 @@ h2{
 	<p id="length" class="invalid">Minimum <b>8 characters</b></p>
   </div>
 <div class="hint-text">Already have an account? <a href="#">Login here</a></div>
-</div>
+</div> -->
 <script type="text/javascript">
 
 var email = document.getElementById("email");
@@ -258,103 +257,84 @@ function validate(){
     }
 }	
 
-var myInput = document.getElementById("psw");
-var letter = document.getElementById("letter");
-var capital = document.getElementById("capital");
-var number = document.getElementById("number");
-var length = document.getElementById("length");
+// var myInput = document.getElementById("psw");
+// var letter = document.getElementById("letter");
+// var capital = document.getElementById("capital");
+// var number = document.getElementById("number");
+// var length = document.getElementById("length");
 
-// When the user clicks on the password field, show the message box
-myInput.onfocus = function() {
-  document.getElementById("message").style.display = "block";
-}
+// // When the user clicks on the password field, show the message box
+// myInput.onfocus = function() {
+//   document.getElementById("message").style.display = "block";
+// }
 
-// When the user clicks outside of the password field, hide the message box
-myInput.onblur = function() {
-  document.getElementById("message").style.display = "none";
-}
+// // When the user clicks outside of the password field, hide the message box
+// myInput.onblur = function() {
+//   document.getElementById("message").style.display = "none";
+// }
 
-// When the user starts to type something inside the password field
-myInput.onkeyup = function() {
-  // Validate lowercase letters
-  var lowerCaseLetters = /[a-z]/g;
-  if(myInput.value.match(lowerCaseLetters)) {  
-    letter.classList.remove("invalid");
-    letter.classList.add("valid");
-  } else {
-    letter.classList.remove("valid");
-    letter.classList.add("invalid");
-  }
-  
-  // Validate capital letters
-  var upperCaseLetters = /[A-Z]/g;
-  if(myInput.value.match(upperCaseLetters)) {  
-    capital.classList.remove("invalid");
-    capital.classList.add("valid");
-  } else {
-    capital.classList.remove("valid");
-    capital.classList.add("invalid");
-  }
-
-  // Validate numbers
-  var numbers = /[0-9]/g;
-  if(myInput.value.match(numbers)) {  
-    number.classList.remove("invalid");
-    number.classList.add("valid");
-  } else {
-    number.classList.remove("valid");
-    number.classList.add("invalid");
-  }
-  
-  // Validate length
-  if(myInput.value.length >= 8) {
-    length.classList.remove("invalid");
-    length.classList.add("valid");
-  } else {
-    length.classList.remove("valid");
-    length.classList.add("invalid");
-  }
-}
-
-// function validate()
-// {
-//   var mobilenumber = /^\d{10}$/ ||/^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;;
-//   if(inputtxt.value.match(mobilenumber))
-//   {
-//       return true;
+// // When the user starts to type something inside the password field
+// myInput.onkeyup = function() {
+//   // Validate lowercase letters
+//   var lowerCaseLetters = /[a-z]/g;
+//   if(myInput.value.match(lowerCaseLetters)) {  
+//     letter.classList.remove("invalid");
+//     letter.classList.add("valid");
+//   } else {
+//     letter.classList.remove("valid");
+//     letter.classList.add("invalid");
 //   }
-//   else
-//   {
-//      alert("Not a valid Phone Number");
-//      return false;
+  
+//   // Validate capital letters
+//   var upperCaseLetters = /[A-Z]/g;
+//   if(myInput.value.match(upperCaseLetters)) {  
+//     capital.classList.remove("invalid");
+//     capital.classList.add("valid");
+//   } else {
+//     capital.classList.remove("valid");
+//     capital.classList.add("invalid");
+//   }
+
+//   // Validate numbers
+//   var numbers = /[0-9]/g;
+//   if(myInput.value.match(numbers)) {  
+//     number.classList.remove("invalid");
+//     number.classList.add("valid");
+//   } else {
+//     number.classList.remove("valid");
+//     number.classList.add("invalid");
+//   }
+  
+//   // Validate length
+//   if(myInput.value.length >= 8) {
+//     length.classList.remove("invalid");
+//     length.classList.add("valid");
+//   } else {
+//     length.classList.remove("valid");
+//     length.classList.add("invalid");
 //   }
 // }
-    
-  
-// function mobilenumber(inputtxt) {
-//   var mobilenumber = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
-//   if((inputtxt.value.match(mobilenumber))
-//         {
-//       return true;
-//         }
-//       else
-//         {
-//         alert("message");
-//         return false;
-//         }
-// }
-function validate(){
-  var phonenumber = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
-  if(phonenumber.test(phonenumber)){
-    document.getElementById("phonenumber").style;
-  }
-  else{
-    document.getElementById("phonenumber").style;
-    backgroundcolor = "red";
-  }
-}
+function passwordChanged() {
+        var strength = document.getElementById('strength');
+        var strongRegex = new RegExp("^(?=.{9,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$", "g");
+        var mediumRegex = new RegExp("^(?=.{6,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+        var enoughRegex = new RegExp("(?=.{4,}).*", "g");
+        var pwd = document.getElementById("psw");
+        if (pwd.value.length == 0) {
+            strength.innerHTML = 'Type Password';
+        } else if (false == enoughRegex.test(pwd.value)) {
+            strength.innerHTML = 'More Characters';
+        } else if (strongRegex.test(pwd.value)) {
+            strength.innerHTML = '<span style="color:green">Strong!</span>';
+        } else if (mediumRegex.test(pwd.value)) {
+            strength.innerHTML = '<span style="color:orange">Medium!</span>';
+        } else {
+            strength.innerHTML = '<span style="color:red">Weak!</span>';
+        }
+    }
 
  </script>
+ 
 
 
 </body>
